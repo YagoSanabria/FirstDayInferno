@@ -3,6 +3,7 @@ import End from './scenes/end.js';
 import Level from './scenes/level.js';
 import CafeFDI from './scenes/cafeFDI.js';
 import BibliotecaFDI from './scenes/bibliotecaFDI.js';
+import HallMedicina from './scenes/hallMedicina.js';
 import PasilloFDI from './scenes/pasilloFDI.js';
 import Phaser from 'phaser';
 
@@ -21,7 +22,7 @@ let config = {
         autoCenter: Phaser.Scale.CENTER_HORIZONTALLY
     },
     pixelArt: true,
-    scene: [Boot, Level, CafeFDI, PasilloFDI, BibliotecaFDI, End],
+    scene: [Boot, Level, CafeFDI, PasilloFDI, BibliotecaFDI, HallMedicina, End],
     physics: {
         default: 'arcade',
         arcade: {

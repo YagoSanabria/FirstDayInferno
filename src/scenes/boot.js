@@ -40,6 +40,7 @@ import img_sombra_plantas from "../../assets/map/TX Shadow Plant.png";
 import bibliofdi from "../../assets/map/biblioteca.json";
 import cafefdi from "../../assets/map/cafe.json";
 import pasillofdi from "../../assets/map/pasillo.json";
+import hallmedicina from "../../assets/map/hallMedicina.json";
 import img_interior from "../../assets/map/Interiors_free_16x16.png";
 import img_muebles from "../../assets/map/Room_Builder_free_16x16.png";
 
@@ -174,12 +175,15 @@ export default class Boot extends Phaser.Scene {
     this.load.image("Interior", img_interior);
     this.load.image("Muebles", img_muebles);
 
+
+
     this.load.tilemapTiledJSON("map", mapa); // Carga el mapa
 
     //TODO AÑADIR TILEDJSON (MAPA)
     this.load.tilemapTiledJSON("bibliotecafdi", bibliofdi);
     this.load.tilemapTiledJSON("cafefdi", cafefdi);
     this.load.tilemapTiledJSON("pasillofdi", pasillofdi);
+    this.load.tilemapTiledJSON("hallmedicina", hallmedicina);
 
     //items del player
     this.load.spritesheet("player_item_isaac", player_item_isaac,{
@@ -409,6 +413,6 @@ export default class Boot extends Phaser.Scene {
       repeat: 0,
     });
 
-    this.scene.start("cafeFDI", {x: 408, y: 78});
+    this.scene.start("hallMedicina", {x: 408, y: 78});
   }
 }
