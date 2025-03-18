@@ -271,13 +271,54 @@ export default class informaticaManager extends Phaser.Scene {
       repeat: 0,
     });
 
-    this.scene.start("cafeFDI", {x: 500, y: 100, playerStats: this.playerStats, managerKey: "informaticaManager"});
+    this.scene.sleep(this);
+    if (!this.scene.isActive("cafeFDI") && !this.scene.isSleeping("cafeFDI")) {
+      console.log("SALA NUEVA")
+      this.scene.start("cafeFDI", {x: 500, y: 100, playerStats: this.playerStats, managerKey: "informaticaManager"});
+    }
+    else{
+      this.scene.wake("cafeFDI");
+      this.scene.bringToTop("cafeFDI");
+      const nuevaSala = this.scene.get("cafeFDI");
+      nuevaSala.updatePlayer({
+        x: zone.spawnX,
+        y: zone.spawnY,
+        playerStats: this.playerStats,
+        managerKey: "informaticaManager"
+      });
+      nuevaSala.cameras.main.fadeIn(500);
+      nuevaSala.cameras.main.startFollow(nuevaSala.player);
+    }
   }
 
   cambiarSala(zone){
+    /*
     this.scene.sleep(zone.prev);
     console.log(zone.spawnRoom);
-    this.scene.launch(zone.spawnRoom, {x: zone.spawnX, y: zone.spawnY, playerStats: this.playerStats, managerKey: "informaticaManager"});
+    this.scene.switch(zone.prev, zone.spawnRoom, {x: zone.spawnX, y: zone.spawnY, playerStats: this.playerStats, managerKey: "informaticaManager"});
+    */
+    this.scene.sleep(zone.prev);
+    console.log("Cambiando a sala:", zone.spawnRoom);
+    if (!this.scene.isActive(zone.spawnRoom) && !this.scene.isSleeping(zone.spawnRoom)) {
+      console.log("SALA NUEVA")
+      this.scene.start(zone.spawnRoom, {x: zone.spawnX, y: zone.spawnY, playerStats: this.playerStats, managerKey: "informaticaManager"});
+    } else {
+      console.log("SALA EXISTE")
+      this.scene.wake(zone.spawnRoom);
+      var existe = true;
+    }
+    this.scene.bringToTop(zone.spawnRoom);
+    if(existe){
+      const nuevaSala = this.scene.get(zone.spawnRoom);
+      nuevaSala.updatePlayer({
+        x: zone.spawnX,
+        y: zone.spawnY,
+        playerStats: this.playerStats,
+        managerKey: "informaticaManager"
+      });
+      nuevaSala.cameras.main.fadeIn(500);
+      nuevaSala.cameras.main.startFollow(nuevaSala.player);
+    }
   }
 
   guardarPlayerStats(stats){

@@ -31,6 +31,13 @@ export default class SalaBase extends Phaser.Scene{
         bullet.explode();
     }
 
+    updatePlayer(stats){
+        console.log('Datos recibidos en update:', stats.playerStats);
+        if(this.player){
+            this.player.updateStats(stats);
+        }
+    }
+
     cambiarSala(player, zone) {
         if(!zone.spawnRoom || !this.player.canChangeRoom) return;
         this.player.canChangeRoom = false;
@@ -40,6 +47,7 @@ export default class SalaBase extends Phaser.Scene{
         });
         this.cameras.main.fadeOut(500, 0, 0, 0);
         this.cameras.main.once('camerafadeoutcomplete', () => {
+            this.manager.guardarPlayerStats(this.player.getStats());
             this.manager.cambiarSala(zone);
         });
     }
@@ -49,7 +57,7 @@ export default class SalaBase extends Phaser.Scene{
         if (Phaser.Input.Keyboard.JustDown(this.escKey)) {
           console.log(`Escena anterior: ${this.scene.key}`);
           this.scene.pause(); // Pausar la escena actual
-          this.scene.launch('PauseMenu', { previousScene: this.scene.key }); // Lanzar la escena de pausa
+          this.scene.launch('PauseMenu', { previousScene: this.scene.key , manager: this.manager}); // Lanzar la escena de pausa
           this.scene.bringToTop('PauseMenu'); // Asegurarse de que PauseMenu esté en la parte superior
         }
       }

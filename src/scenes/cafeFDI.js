@@ -79,4 +79,8 @@ export default class CafeFDI extends SalaBase {
         this.transitionZones.setVisible(false);
         this.physics.add.overlap(this.player, this.transitionZones, this.cambiarSala, null, this);
     }
+
+    añadirColisiones(){
+        
+    }
 }

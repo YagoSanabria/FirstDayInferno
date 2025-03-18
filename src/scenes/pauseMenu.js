@@ -15,6 +15,7 @@ export default class PauseMenu extends Phaser.Scene {
         };
 
         this.previousScene = data.previousScene; // Guardar el nombre de la escena anterior
+        this.manager = this.scene.get(data.manager);
         console.log(`Escena actual: ${this.scene.key}`);
 
 
@@ -43,8 +44,8 @@ export default class PauseMenu extends Phaser.Scene {
                 this.scene.stop(this.previousScene); // Cerrar la escena actual
                 this.scene.start('MainMenu'); // Ir al menú principal
             } else { // Si estás en un nivel
-                this.scene.stop(this.previousScene); // Cerrar la escena actual
-                this.scene.start('selectorNivel'); // Ir al selector de niveles
+                this.scene.sleep(this.previousScene); // Cerrar la escena actual
+                this.manager.volverAlLobby(true);
             }
 
             this.scene.stop(); // Cerrar la escena de pausa

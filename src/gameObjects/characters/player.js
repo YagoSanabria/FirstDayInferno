@@ -305,4 +305,15 @@ export default class Player extends SpriteBase {
             shootCooldown: this.shootCooldown
         };
     }
+
+    updateStats(stats){
+        this.body.x = stats.x,
+        this.body.y = stats.y,
+        this.health = stats.playerStats.health;
+        this.coins = stats.playerStats.coins;
+        this.equippedItem = stats.playerStats.equippedItem;
+        this.itemSprite = stats.playerStats.itemSprite;
+        this.speed = stats.playerStats.speed;
+        this.shootCooldown = stats.playerStats.shootCooldown;
+    }
 }
